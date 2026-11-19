@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tontest</title>
+<style>
+  body { font-family: -apple-system, Helvetica, Arial, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; color: #1a1a1a; background: #fff; }
+  button { display: block; width: 100%; min-height: 56px; margin: 0.75rem 0; font-size: 1.1rem; border-radius: 10px; border: 1px solid #2563EB; background: #DBEAFE; color: #1D4ED8; cursor: pointer; }
+  #log { background: #f3f4f6; border-radius: 8px; padding: 0.75rem 1rem; font-family: Menlo, monospace; font-size: 0.9rem; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+<h1>Tontest</h1>
+<p>Tippe die Knöpfe nacheinander an und sag, bei welchem du etwas hörst. Mach dann ein Bildschirmfoto vom grauen Kasten.</p>
+<button id="b1">1 · Einfacher Piepton (1 Sekunde)</button>
+<button id="b2">2 · Intervall wie in der App (große Terz)</button>
+<div id="log">Noch nichts angetippt.</div>
+<script src="js/exercises.js?v=3"></script>
+<script src="js/ton.js?v=3"></script>
+<script>
+  const log = document.getElementById('log');
+  const lines = [];
+  function add(t) { lines.push(t); log.textContent = lines.join('\n'); }
+  window.addEventListener('error', e => add('FEHLER: ' + e.message));
+  add('Browser: ' + navigator.userAgent.replace(/.*\) /, ''));
+  add('AudioContext vorhanden: ' + !!(window.AudioContext || window.webkitAudioContext));
+  add('audioSession: ' + (navigator.audioSession ? navigator.audioSession.type : 'gibt es nicht'));
+
+  document.getElementById('b1').addEventListener('click', async () => {
+    try {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      const ctx = new AC();
+      add('Piepton: Zustand vorher = ' + ctx.state);
+      await ctx.resume();
+      add('Piepton: Zustand nach resume = ' + ctx.state + ', Abtastrate ' + ctx.sampleRate);
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      g.gain.value = 0.3;
+      o.frequency.value = 440;
+      o.connect(g); g.connect(ctx.destination);
+      o.start(); o.stop(ctx.currentTime + 1);
+      setTimeout(() => add('Piepton: Zeit läuft? currentTime = ' + ctx.currentTime.toFixed(2)), 600);
+    } catch (e) { add('Piepton FEHLER: ' + e); }
+  });
+
+  document.getElementById('b2').addEventListener('click', () => {
+    try {
+      Ton.demo(4, 'up');
+      setTimeout(() => add('App-Ton: Zustand = ' + (Ton.ctx ? Ton.ctx.state : 'kein Context') + ', currentTime = ' + (Ton.ctx ? Ton.ctx.currentTime.toFixed(2) : '-')), 600);
+    } catch (e) { add('App-Ton FEHLER: ' + e); }
+  });
+</script>
+</body>
+</html>
