@@ -37,7 +37,7 @@ const Ton = {
       const AC = window.AudioContext || window.webkitAudioContext;
       if (!AC) return null;
       // Safari 17+: Ton auch bei stumm geschaltetem iPad abspielen
-      try { if (!this.noSession && navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) { /* egal */ }
+      try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) { /* egal */ }
       this.ctx = new AC();
     }
     return this.ctx;
