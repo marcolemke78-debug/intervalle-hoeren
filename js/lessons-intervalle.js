@@ -248,7 +248,7 @@ window.LESSON_DATA = (window.LESSON_DATA || []).concat([
         <table class="info-table">
           <tr><th>Intervall</th><th>Merklied (abwärts)</th><th>anhören</th></tr>
           <tr><td>Sekunde</td><td><strong>Yes</strong>-<strong>ter</strong>-day (Beatles)</td><td>${pb(2, 'down', 'Sekunde ab')}</td></tr>
-          <tr><td>Terz</td><td><strong>Ku</strong>-<strong>ckuck</strong>, Ku-ckuck; Hänschen klein</td><td>${pb(3, 'down', 'Terz ab')}</td></tr>
+          <tr><td>Terz</td><td><strong>Ku</strong>-<strong>ckuck</strong>, Ku-ckuck; Hänschen klein (kleine Terz)<br>Beethoven 5: ta-ta-ta-<strong>taaa</strong> (große Terz)</td><td>${pb(3, 'down', 'Kuckuck')} ${pb(4, 'down', 'Beethoven')}</td></tr>
           <tr><td>Quarte</td><td>Eine kleine Nachtmusik (Mozart)</td><td>${pb(5, 'down', 'Quarte ab')}</td></tr>
           <tr><td>Quinte</td><td><strong>Flint</strong>-<strong>stones</strong> (Familie Feuerstein)</td><td>${pb(7, 'down', 'Quinte ab')}</td></tr>
           <tr><td>Oktave</td><td>kein Lied nötig: klingt wie derselbe Ton, nur tiefer</td><td>${pb(12, 'down', 'Oktave ab')}</td></tr>
