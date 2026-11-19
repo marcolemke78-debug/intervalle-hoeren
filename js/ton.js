@@ -33,8 +33,32 @@ const Ton = {
       try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) { /* egal */ }
       this.ctx = new AC();
     }
-    if (this.ctx.state !== 'running') this.ctx.resume(); // iOS: auch 'interrupted' nach App-Wechsel
     return this.ctx;
+  },
+
+  // Erst abspielen, wenn der Ton wirklich läuft. Safari (iPad) startet ihn beim ersten
+  // Antippen verzögert, sofort geplante Töne gingen dann manchmal verloren.
+  whenReady(fn) {
+    const ctx = this.audio();
+    if (!ctx) return;
+    if (ctx.state === 'running') { fn(); return; }
+    // iOS: auch 'interrupted' nach App-Wechsel. Spätestens nach 300 ms trotzdem spielen,
+    // falls resume() hängt, sonst wäre gar nichts zu hören.
+    let done = false;
+    const go = () => { if (!done) { done = true; fn(); } };
+    ctx.resume().then(go, go);
+    setTimeout(go, 300);
+  },
+
+  // Beim ersten Berühren der Seite den Ton freischalten (kurzer stiller Ton)
+  unlock() {
+    const ctx = this.audio();
+    if (!ctx) return;
+    ctx.resume();
+    const src = ctx.createBufferSource();
+    src.buffer = ctx.createBuffer(1, 1, 22050);
+    src.connect(ctx.destination);
+    src.start(0);
   },
 
   freq(midi) { return 440 * Math.pow(2, (midi - 69) / 12); },
@@ -63,6 +87,9 @@ const Ton = {
 
   // Intervall abspielen: dir 'up' | 'down' | 'together'
   play(base, semis, dir) {
+    this.whenReady(() => this.playNow(base, semis, dir));
+  },
+  playNow(base, semis, dir) {
     if (dir === 'together') {
       this.note(base, 0, 1.6);
       this.note(base + semis, 0, 1.6);
@@ -79,7 +106,7 @@ const Ton = {
   demo(semis, dir) { this.play(60, semis, dir || 'up'); },
 
   // Klaviatur in Lektion 7: Taste antippen = c' und dann diese Taste
-  key(semis) { if (semis === 0) this.note(60, 0, 1.2); else this.play(60, semis, 'up'); },
+  key(semis) { if (semis === 0) this.whenReady(() => this.note(60, 0, 1.2)); else this.play(60, semis, 'up'); },
 
   // Zufälliger Grundton, damit man nicht nach der Tonhöhe rät
   randomBase(semis, dir) {
@@ -88,6 +115,16 @@ const Ton = {
     return low + Math.floor(Math.random() * 13);
   }
 };
+
+// Erste Berührung irgendwo auf der Seite schaltet den Ton frei
+(function () {
+  const evs = ['pointerdown', 'touchend', 'keydown'];
+  function first() {
+    try { Ton.unlock(); } catch (e) { /* egal */ }
+    evs.forEach(x => document.removeEventListener(x, first, true));
+  }
+  evs.forEach(x => document.addEventListener(x, first, true));
+})();
 
 /**
  * Kurzformen von Intervallen beim Tippen erlauben (Trainer und Lückentexte):
