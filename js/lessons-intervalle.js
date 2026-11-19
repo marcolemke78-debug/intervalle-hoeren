@@ -140,7 +140,7 @@ window.LESSON_DATA = (window.LESSON_DATA || []).concat([
       {
         type: 'interval-ear',
         question: 'Sekunde, Terz, Quinte oder Oktave? Sing im Kopf die Merklieder mit.',
-        set: [2, 3, 4, 7, 12], names: 'grob', direction: 'up', rounds: 10, need: 8
+        set: [2, 4, 7, 12], names: 'grob', direction: 'up', rounds: 10, need: 8
       }
     ]
   },
