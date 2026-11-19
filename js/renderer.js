@@ -209,9 +209,9 @@ const Renderer = {
     if (pool.ear.length) {
       const set = [];
       let fein = false;
-      pool.ear.forEach(e => { if (e.names === 'fein') fein = true; e.set.forEach(s => { if (set.indexOf(s) === -1) set.push(s); }); });
+      pool.ear.filter(e => e.names !== 'klang').forEach(e => { if (e.names === 'fein') fein = true; e.set.forEach(s => { if (set.indexOf(s) === -1) set.push(s); }); });
       round.push({ lessonId: null, ex: { type: 'interval-ear', question: 'Hörrunde: alle Intervalle, die du schon kennst, auf und ab.',
-        set: fein ? set : set.filter(s => s !== 6), names: fein ? 'fein' : 'grob', direction: 'mixed', rounds: 8, need: 6, together: fein } });
+        set: fein ? set : set.filter(s => s !== 6), names: fein ? 'fein' : 'grob', direction: 'mixed', rounds: 8, need: 6 } });
     }
     const sec = this.el('section', 'phase exercises active');
     c.appendChild(sec);

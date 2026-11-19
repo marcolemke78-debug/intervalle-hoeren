@@ -45,6 +45,7 @@ window.LESSON_DATA = (window.LESSON_DATA || []).concat([
           <tr><td>c – c'</td><td>8</td><td>Oktave</td><td>${pb(12, 'up', "c – c'")}</td></tr>
         </table>
         <div class="tip-box"><strong>Gut zu wissen:</strong> Zweimal derselbe Ton heißt <em>Prime</em> (die erste). Die Oktave (die achte) klingt fast wie derselbe Ton, nur höher. Darum heißen beide Töne gleich: c und c'.</div>
+        <div class="tip-box"><strong>Drei Arten zu hören:</strong> Jedes Intervall kannst du in den Übungen auf drei Arten anhören: <strong>tief → hoch</strong>, <strong>hoch → tief</strong> und <strong>zusammen</strong> (beide Töne gleichzeitig). Hör dir jedes Intervall in allen drei Formen an. So lernt dein Ohr nicht nur den Abstand, sondern auch, wie das Intervall <em>klingt</em>. Hier die Terz c – e: ${pb(4, 'up', 'tief → hoch')} ${pb(4, 'down', 'hoch → tief')} ${pb(4, 'together', 'zusammen')}</div>
         <div class="warning-box"><strong>Typischer Fehler:</strong> Nur die Schritte zählen. Von c nach e sind es zwei Schritte, aber drei Töne (c, d, e). Also ist es eine <strong>Terz</strong>, keine Sekunde.</div>
         <div class="why-context"><strong>Warum ist das wichtig?</strong> Wer Intervalle hört, kann Melodien schneller nachsingen, nach Gehör spielen und Noten leichter lesen.</div>`
     },
@@ -84,7 +85,7 @@ window.LESSON_DATA = (window.LESSON_DATA || []).concat([
       },
       {
         type: 'interval-ear',
-        question: 'Erster Hörtest: Ist das ein kleiner Schritt (Sekunde) oder ein großer Sprung (Oktave)? Tippe zuerst auf &bdquo;Anhören&ldquo;.',
+        question: 'Erster Hörtest: Ist das ein kleiner Schritt (Sekunde) oder ein großer Sprung (Oktave)? Der kräftig blaue Knopf spielt das Intervall so, wie es gefragt ist.',
         set: [2, 12], names: 'grob', direction: 'up', rounds: 6, need: 5
       }
     ]
@@ -311,7 +312,7 @@ window.LESSON_DATA = (window.LESSON_DATA || []).concat([
           <li>Eng oder weit? (Schritt, kleiner Sprung, großer Sprung)</li>
           <li>Passendes Lied suchen (abwärts: Abwärts-Lied oder Umdreh-Trick)</li>
         </ol>
-        <div class="tip-box"><strong>Tipp:</strong> Tippe ruhig mehrmals auf &bdquo;Anhören&ldquo;. Es zählt nur die Antwort.</div>
+        <div class="tip-box"><strong>Tipp:</strong> Tippe ruhig mehrmals auf die Knöpfe, auch auf die anderen zwei Formen. Es zählt nur die Antwort.</div>
         <div class="why-context"><strong>Warum ist das wichtig?</strong> Erst wenn du die Intervalle auch gemischt erkennst, sitzen sie wirklich. Forscher haben gezeigt: Gemischtes Üben bleibt deutlich länger im Kopf.</div>`
     },
     example: {
@@ -367,7 +368,7 @@ window.LESSON_DATA = (window.LESSON_DATA || []).concat([
           <tr><td>große Terz</td><td>4</td><td>When the Saints</td><td>${pb(4, 'up', 'gr. Terz')}</td></tr>
         </table>
         <div class="analogy-box"><strong>Wie im Alltag:</strong> Die große Terz klingt wie Sonnenschein: hell und fröhlich (Dur). Die kleine Terz klingt wie ein Regentag: eher nachdenklich oder traurig (Moll). Die kleine Sekunde reibt und klingt wie Gefahr, darum nutzt sie der Hai-Film.</div>
-        <div class="tip-box"><strong>Zusammen anhören:</strong> Wenn beide Töne gleichzeitig klingen, hörst du Dur und Moll noch deutlicher. In der Übung gibt es dafür den Knopf &bdquo;Zusammen anhören&ldquo;.</div>
+        <div class="tip-box"><strong>Zusammen anhören:</strong> Wenn beide Töne gleichzeitig klingen, hörst du Dur und Moll noch deutlicher. Probier in der Übung bei jedem Intervall den Knopf &bdquo;♫ zusammen&ldquo;.</div>
         <div class="why-context"><strong>Warum ist das wichtig?</strong> Ob ein Lied fröhlich oder traurig klingt, hängt oft an genau diesem einen Halbton zwischen kleiner und großer Terz.</div>`
     },
     example: {
@@ -390,12 +391,12 @@ window.LESSON_DATA = (window.LESSON_DATA || []).concat([
       {
         type: 'interval-ear',
         question: 'Kleine oder große Sekunde? Der Hai oder die Entchen?',
-        set: [1, 2], names: 'fein', direction: 'up', rounds: 8, need: 7, together: true
+        set: [1, 2], names: 'fein', direction: 'up', rounds: 8, need: 7
       },
       {
         type: 'interval-ear',
         question: 'Kleine oder große Terz? Regen oder Sonne?',
-        set: [3, 4], names: 'fein', direction: 'up', rounds: 10, need: 8, together: true
+        set: [3, 4], names: 'fein', direction: 'up', rounds: 10, need: 8
       },
       {
         type: 'multiple-choice',
@@ -440,7 +441,7 @@ window.LESSON_DATA = (window.LESSON_DATA || []).concat([
       {
         type: 'interval-ear',
         question: 'Reine Quarte, Tritonus oder reine Quinte?',
-        set: [5, 6, 7], names: 'fein', direction: 'up', rounds: 10, need: 8, together: true
+        set: [5, 6, 7], names: 'fein', direction: 'up', rounds: 10, need: 8
       },
       {
         type: 'fill-in-blank',
@@ -452,7 +453,7 @@ window.LESSON_DATA = (window.LESSON_DATA || []).concat([
       {
         type: 'interval-ear',
         question: 'Gemischt mit Sekunden und Terzen aus Lektion 7.',
-        set: [1, 2, 3, 4, 5, 6, 7], names: 'fein', direction: 'up', rounds: 10, need: 7, together: true
+        set: [1, 2, 3, 4, 5, 6, 7], names: 'fein', direction: 'up', rounds: 10, need: 7
       }
     ]
   },
@@ -488,12 +489,12 @@ window.LESSON_DATA = (window.LESSON_DATA || []).concat([
       {
         type: 'interval-ear',
         question: 'Kleine oder große Sexte?',
-        set: [8, 9], names: 'fein', direction: 'up', rounds: 8, need: 6, together: true
+        set: [8, 9], names: 'fein', direction: 'up', rounds: 8, need: 6
       },
       {
         type: 'interval-ear',
         question: 'Kleine Septime, große Septime oder Oktave?',
-        set: [10, 11, 12], names: 'fein', direction: 'up', rounds: 10, need: 8, together: true
+        set: [10, 11, 12], names: 'fein', direction: 'up', rounds: 10, need: 8
       },
       {
         type: 'matching',
@@ -566,7 +567,62 @@ window.LESSON_DATA = (window.LESSON_DATA || []).concat([
       {
         type: 'interval-ear',
         question: 'Alle 12 Intervalle fein, auf und ab. Nimm dir Zeit.',
-        set: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], names: 'fein', direction: 'mixed', rounds: 12, need: 8, together: true
+        set: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], names: 'fein', direction: 'mixed', rounds: 12, need: 8
+      }
+    ]
+  },
+  // ======================================================================
+  {
+    id: 11,
+    title: 'Zusammenklang: rein, konsonant, dissonant',
+    explanation: {
+      html: `
+        <p>Klingen zwei Töne <strong>gleichzeitig</strong>, nennt man das einen <strong>Zusammenklang</strong>. Jedes Intervall hat dabei seinen eigenen Charakter. Man teilt sie in drei Gruppen ein:</p>
+        <table class="info-table">
+          <tr><th>Gruppe</th><th>So klingt es</th><th>Intervalle</th><th>anhören</th></tr>
+          <tr><td><strong>rein</strong></td><td>leer und offen, die Töne verschmelzen fast zu einem</td><td>Oktave, Quinte, Quarte</td><td>${pb(12, 'together', 'Oktave')} ${pb(7, 'together', 'Quinte')} ${pb(5, 'together', 'Quarte')}</td></tr>
+          <tr><td><strong>konsonant</strong></td><td>voll, warm und angenehm</td><td>Terzen, Sexten</td><td>${pb(4, 'together', 'Terz')} ${pb(9, 'together', 'Sexte')}</td></tr>
+          <tr><td><strong>dissonant</strong></td><td>die Töne reiben sich, es klingt spannend oder schräg</td><td>Sekunden, Septimen, Tritonus (ein schräges Intervall, genau zwischen Quarte und Quinte, kommt später noch genauer)</td><td>${pb(2, 'together', 'Sekunde')} ${pb(10, 'together', 'Septime')} ${pb(6, 'together', 'Tritonus')}</td></tr>
+        </table>
+        <div class="analogy-box"><strong>Wie im Alltag:</strong> Stell dir zwei Leute vor, die nebeneinander gehen. <strong>Rein</strong> ist wie Zwillinge im Gleichschritt: fast wie eine Person. <strong>Konsonant</strong> ist wie zwei gute Freunde: verschieden, aber sie passen schön zusammen. <strong>Dissonant</strong> ist wie zwei, die sich gerade streiten: spannend, und man wartet, dass sie sich wieder vertragen.</div>
+        <div class="tip-box"><strong>Wichtig:</strong> Dissonant heißt nicht &bdquo;falsch&ldquo;. Musik braucht Dissonanzen für Spannung, zum Beispiel in Filmmusik. Danach löst sie sich meist in einen Wohlklang auf.</div>
+        <div class="warning-box"><strong>Typischer Fehler:</strong> Die Oktave für einen einzigen Ton halten. Hör genau hin: Es sind zwei Töne, sie verschmelzen nur so gut.</div>
+        <div class="why-context"><strong>Warum ist das wichtig?</strong> Der Klang ist eine zweite Spur zum Intervall. Wenn du unsicher bist, ob Septime oder Oktave: Reibt es, ist es die Septime. Klingt es leer, die Oktave.</div>`
+    },
+    example: {
+      title: 'Septime oder Oktave? Der Klang verrät es',
+      steps: [
+        { label: 'Zusammen anhören', html: '<p>' + pb(10, 'together', 'Rätsel-Klang') + '</p>' },
+        { label: 'Leer oder reibt es?', html: '<p>Die Töne reiben sich, es klingt spannend.</p>' },
+        { label: 'Gruppe', html: '<p>Also <strong>dissonant</strong>. Von den großen Sprüngen ist nur die Septime dissonant, die Oktave ist rein.</p>' },
+        { label: 'Gegenprobe', html: '<p>' + pb(12, 'together', 'Oktave zum Vergleich') + ' Die Oktave klingt leer und ruhig.</p>' }
+      ]
+    },
+    exercises: [
+      {
+        type: 'matching',
+        question: 'Zu welcher Gruppe gehört das Intervall?',
+        pairs: [
+          { left: 'Oktave', right: 'rein' },
+          { left: 'Quinte', right: 'rein' },
+          { left: 'Terz', right: 'konsonant' },
+          { left: 'Sexte', right: 'konsonant' },
+          { left: 'Sekunde', right: 'dissonant' },
+          { left: 'Septime', right: 'dissonant' }
+        ],
+        explanation: 'Rein: Oktave, Quinte, Quarte. Konsonant: Terzen und Sexten. Dissonant: Sekunden, Septimen und der Tritonus.'
+      },
+      {
+        type: 'interval-ear',
+        question: 'Beide Töne klingen zusammen. Rein, konsonant oder dissonant?',
+        set: [2, 4, 3, 7, 9, 10, 12, 5, 1], names: 'klang', direction: 'together', rounds: 10, need: 7
+      },
+      {
+        type: 'fill-in-blank',
+        question: 'Ergänze ohne nachzuschauen.',
+        text: 'Terzen und Sexten klingen {{blank}}. Sekunden und Septimen klingen {{blank}}.',
+        blanks: [{ correct: 'konsonant', alternatives: ['wohlklingend', 'angenehm'] }, { correct: 'dissonant', alternatives: ['reibend', 'spannend'] }],
+        explanation: 'Terzen und Sexten = konsonant (voll und warm). Sekunden und Septimen = dissonant (reiben sich).'
       }
     ]
   }

@@ -7,18 +7,25 @@
  *   <button class="play-btn" onclick="Ton.demo(7,'up')">▶ Quinte</button>
  */
 const INTERVALS = {
-  1:  { fein: 'kleine Sekunde', grob: 'Sekunde', up: 'Der weiße Hai, Pink Panther', down: 'Für Elise' },
-  2:  { fein: 'große Sekunde', grob: 'Sekunde', up: 'Alle meine Entchen, Happy Birthday', down: 'Yesterday (Beatles)' },
-  3:  { fein: 'kleine Terz', grob: 'Terz', up: 'Smoke on the Water, Greensleeves', down: 'Kuckuck, Kuckuck; Hänschen klein' },
-  4:  { fein: 'große Terz', grob: 'Terz', up: 'When the Saints Go Marching In', down: 'Beethoven 5 (ta-ta-ta-taaa), Swing Low' },
-  5:  { fein: 'reine Quarte', grob: 'Quarte', up: 'O Tannenbaum, Treulich geführt (Hochzeitsmarsch)', down: 'Eine kleine Nachtmusik' },
-  6:  { fein: 'Tritonus', grob: 'Tritonus', up: 'Die Simpsons', down: '' },
-  7:  { fein: 'reine Quinte', grob: 'Quinte', up: 'Morgen kommt der Weihnachtsmann, Star Wars', down: 'Familie Feuerstein (Flintstones)' },
-  8:  { fein: 'kleine Sexte', grob: 'Sexte', up: 'The Entertainer (großer Sprung nach dem Auftakt)', down: '' },
-  9:  { fein: 'große Sexte', grob: 'Sexte', up: 'My Bonnie Is Over the Ocean', down: '' },
-  10: { fein: 'kleine Septime', grob: 'Septime', up: 'Star Trek (alte Serie), Somewhere (West Side Story)', down: '' },
-  11: { fein: 'große Septime', grob: 'Septime', up: '', down: '' },
-  12: { fein: 'Oktave', grob: 'Oktave', up: 'Somewhere Over the Rainbow', down: '' }
+  1:  { klang: 'dissonant', fein: 'kleine Sekunde', grob: 'Sekunde', up: 'Der weiße Hai, Pink Panther', down: 'Für Elise' },
+  2:  { klang: 'dissonant', fein: 'große Sekunde', grob: 'Sekunde', up: 'Alle meine Entchen, Happy Birthday', down: 'Yesterday (Beatles)' },
+  3:  { klang: 'konsonant', fein: 'kleine Terz', grob: 'Terz', up: 'Smoke on the Water, Greensleeves', down: 'Kuckuck, Kuckuck; Hänschen klein' },
+  4:  { klang: 'konsonant', fein: 'große Terz', grob: 'Terz', up: 'When the Saints Go Marching In', down: 'Beethoven 5 (ta-ta-ta-taaa), Swing Low' },
+  5:  { klang: 'rein', fein: 'reine Quarte', grob: 'Quarte', up: 'O Tannenbaum, Treulich geführt (Hochzeitsmarsch)', down: 'Eine kleine Nachtmusik' },
+  6:  { klang: 'dissonant', fein: 'Tritonus', grob: 'Tritonus', up: 'Die Simpsons', down: '' },
+  7:  { klang: 'rein', fein: 'reine Quinte', grob: 'Quinte', up: 'Morgen kommt der Weihnachtsmann, Star Wars', down: 'Familie Feuerstein (Flintstones)' },
+  8:  { klang: 'konsonant', fein: 'kleine Sexte', grob: 'Sexte', up: 'The Entertainer (großer Sprung nach dem Auftakt)', down: '' },
+  9:  { klang: 'konsonant', fein: 'große Sexte', grob: 'Sexte', up: 'My Bonnie Is Over the Ocean', down: '' },
+  10: { klang: 'dissonant', fein: 'kleine Septime', grob: 'Septime', up: 'Star Trek (alte Serie), Somewhere (West Side Story)', down: '' },
+  11: { klang: 'dissonant', fein: 'große Septime', grob: 'Septime', up: '', down: '' },
+  12: { klang: 'rein', fein: 'Oktave', grob: 'Oktave', up: 'Somewhere Over the Rainbow', down: '' }
+};
+
+// Was der Klang bedeutet (für Rückmeldung und Lektion "Zusammenklang")
+const KLANG = {
+  rein: 'rein: klingt leer und offen, die Töne verschmelzen fast',
+  konsonant: 'konsonant: klingt voll, warm und angenehm',
+  dissonant: 'dissonant: die Töne reiben sich, es klingt spannend'
 };
 
 const Ton = {
@@ -154,11 +161,11 @@ Exercises.intervalShort = function (t) {
 /**
  * Hörübung. Felder:
  *   set        – Liste der Halbtonzahlen, die vorkommen können, z. B. [2, 4, 7, 12]
- *   names      – 'grob' (Sekunde, Terz …) oder 'fein' (kleine Terz, große Terz …)
- *   direction  – 'up' | 'down' | 'mixed'
+ *   names      – 'grob' (Sekunde, Terz …), 'fein' (kleine Terz …) oder 'klang' (rein, konsonant, dissonant)
+ *   direction  – wie das Intervall zuerst erklingt: 'up' | 'down' | 'together' | 'mixed' (auf oder ab)
+ *                Alle drei Formen (tief → hoch, hoch → tief, zusammen) lassen sich immer per Knopf anhören.
  *   rounds     – Anzahl Intervalle pro Runde (Standard 10)
  *   need       – so viele müssen richtig sein (Standard 8)
- *   together   – true: zusätzlich Knopf "Zusammen anhören"
  *   question   – Text über der Übung
  */
 Exercises.renderIntervalEar = function (exercise, container, onComplete, onWrong) {
@@ -168,30 +175,32 @@ Exercises.renderIntervalEar = function (exercise, container, onComplete, onWrong
     if (html !== undefined) e.innerHTML = html;
     return e;
   };
-  const nameKey = exercise.names === 'fein' ? 'fein' : 'grob';
+  const nameKey = exercise.names === 'fein' ? 'fein' : exercise.names === 'klang' ? 'klang' : 'grob';
   const rounds = exercise.rounds || 10;
   const need = exercise.need || 8;
 
   // Antwortknöpfe: jeder Name nur einmal, nach Größe sortiert
-  const answers = [];
+  let answers = [];
   exercise.set.slice().sort((a, b) => a - b).forEach(s => {
     const n = INTERVALS[s][nameKey];
     if (answers.indexOf(n) === -1) answers.push(n);
   });
+  if (nameKey === 'klang') answers = ['rein', 'konsonant', 'dissonant'].filter(k => answers.indexOf(k) !== -1);
 
   const wrapper = el('div', 'exercise-ear');
   wrapper.appendChild(el('p', 'exercise-question', exercise.question
     || 'Hör dir das Intervall an und tippe, welches es ist.'));
   const status = el('div', 'ear-status');
   wrapper.appendChild(status);
-  const controls = el('div', 'listening-controls');
-  const playBtn = el('button', 'listening-play-btn', '▶ Anhören');
-  controls.appendChild(playBtn);
-  let togetherBtn = null;
-  if (exercise.together) {
-    togetherBtn = el('button', 'listening-slow-btn', '♫ Zusammen anhören');
-    controls.appendChild(togetherBtn);
-  }
+  // Drei Arten, dasselbe Intervall zu hören. Der Knopf der Frage-Form ist kräftig blau.
+  const controls = el('div', 'listening-controls ear-play');
+  const playBtns = {};
+  [['up', '▶ tief → hoch'], ['down', '▶ hoch → tief'], ['together', '♫ zusammen']].forEach(([d, label]) => {
+    const b = el('button', 'listening-slow-btn', label);
+    b.addEventListener('click', () => Ton.play(current.base, current.semis, d));
+    playBtns[d] = b;
+    controls.appendChild(b);
+  });
   wrapper.appendChild(controls);
   const optBox = el('div', 'mc-options ear-options');
   wrapper.appendChild(optBox);
@@ -213,12 +222,18 @@ Exercises.renderIntervalEar = function (exercise, container, onComplete, onWrong
     } while (current && exercise.set.length > 1 && s === current.semis && Math.random() < 0.7);
     return { semis: s, dir: dir, base: Ton.randomBase(s, dir) };
   }
-  function dirText(d) { return d === 'down' ? 'abwärts' : 'aufwärts'; }
+  function dirText(d) { return d === 'down' ? 'abwärts' : d === 'together' ? 'zusammen' : 'aufwärts'; }
   function song(s, d) {
     const iv = INTERVALS[s];
-    const t = d === 'down' ? iv.down : iv.up;
     if (s === 11) return 'Merkhilfe: klingt wie eine schiefe Oktave.';
-    return t ? 'Merklied ' + dirText(d) + ': <em>' + t + '</em>' : '';
+    const t = d === 'down' ? iv.down : iv.up;
+    return t ? 'Merklied ' + (d === 'down' ? 'abwärts' : 'aufwärts') + ': <em>' + t + '</em>' : '';
+  }
+  // Klang (und bei der Klang-Übung auch der Name) als Zusatzinfo
+  function info(s, d) {
+    const iv = INTERVALS[s];
+    const what = nameKey === 'klang' ? 'Das Intervall war ' + (s === 6 ? 'ein' : 'eine') + ' <strong>' + iv.fein + '</strong>. ' : '';
+    return what + 'Klang ' + KLANG[iv.klang] + '. ' + song(s, d);
   }
   function updateStatus() {
     status.innerHTML = 'Intervall <strong>' + Math.min(answered ? round : round + 1, rounds) + '</strong> von ' + rounds
@@ -237,6 +252,9 @@ Exercises.renderIntervalEar = function (exercise, container, onComplete, onWrong
       optBox.appendChild(b);
     });
     updateStatus();
+    Object.keys(playBtns).forEach(d => {
+      playBtns[d].className = d === current.dir ? 'listening-play-btn' : 'listening-slow-btn';
+    });
     if (autoplay) Ton.play(current.base, current.semis, current.dir);
   }
 
@@ -256,14 +274,17 @@ Exercises.renderIntervalEar = function (exercise, container, onComplete, onWrong
       correct++;
       btn.classList.add('correct');
       feedback.className = 'exercise-feedback correct';
-      feedback.innerHTML = '<p>Richtig: <strong>' + right + '</strong> ' + dirText(current.dir) + '. ' + song(current.semis, current.dir) + '</p>';
+      feedback.innerHTML = '<p>Richtig: <strong>' + right + '</strong>' + (nameKey === 'klang' ? '' : ' ' + dirText(current.dir)) + '.</p><p>' + info(current.semis, current.dir) + '</p>'
+        + '<p class="ear-hint">Tipp: Hör es dir auch in den anderen zwei Formen an.</p>';
     } else {
       btn.classList.add('incorrect');
       optBox.querySelectorAll('.mc-option').forEach(x => { if (x.textContent === right) x.classList.add('correct'); });
       onWrong();
       feedback.className = 'exercise-feedback incorrect';
-      feedback.innerHTML = '<p>Das war ' + (current.semis === 6 ? 'ein' : 'eine') + ' <strong>' + right + '</strong> ' + dirText(current.dir) + '. ' + song(current.semis, current.dir)
-        + '</p><p>Hör beide noch einmal und vergleiche:</p>';
+      feedback.innerHTML = (nameKey === 'klang'
+          ? '<p>Richtig wäre <strong>' + right + '</strong>.</p>'
+          : '<p>Das war ' + (current.semis === 6 ? 'ein' : 'eine') + ' <strong>' + right + '</strong> ' + dirText(current.dir) + '.</p>')
+        + '<p>' + info(current.semis, current.dir) + '</p><p>Hör beide noch einmal und vergleiche:</p>';
       const row = el('div', 'listening-controls');
       row.appendChild(compareBtn('▶ ' + right + ' (richtig)', current.semis, current.dir));
       // passendes Intervall zum getippten Namen suchen (bei grob: das am nächsten liegende)
@@ -301,8 +322,6 @@ Exercises.renderIntervalEar = function (exercise, container, onComplete, onWrong
     wrapper.appendChild(box);
   }
 
-  playBtn.addEventListener('click', () => Ton.play(current.base, current.semis, current.dir));
-  if (togetherBtn) togetherBtn.addEventListener('click', () => Ton.play(current.base, current.semis, 'together'));
   nextBtn.addEventListener('click', () => startItem(true));
   startItem(false);
 };

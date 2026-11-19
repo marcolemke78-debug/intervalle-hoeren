@@ -12,6 +12,7 @@ const KA = {
   date: '',
   topics: [
     { title: 'Grob bestimmen: aufwärts', lessons: [1, 2, 3, 4] },
+    { title: 'Zusammenklang: rein, konsonant, dissonant', lessons: [11] },
     { title: 'Grob bestimmen: abwärts und gemischt', lessons: [5, 6] },
     { title: 'Fein bestimmen: klein, groß, rein', lessons: [7, 8, 9] },
     { title: 'Fein bestimmen: alles gemischt', lessons: [10] },
@@ -26,6 +27,7 @@ const MODULES = { m1: 'Stufe 1: Grob bestimmen', m2: 'Stufe 2: Fein bestimmen' }
 
 const LESSONS = [
   { id: 1, title: 'Was ist ein Intervall?', module: 'm1' },
+  { id: 11, title: 'Zusammenklang: rein, konsonant, dissonant', module: 'm1' },
   { id: 2, title: 'Sekunde, Terz, Quinte, Oktave', module: 'm1' },
   { id: 3, title: 'Quarte oder Quinte?', module: 'm1' },
   { id: 4, title: 'Sexte und Septime', module: 'm1' },
