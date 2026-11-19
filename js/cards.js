@@ -8,7 +8,7 @@ const CARDS = {
   speak: null,
   reverse: false,
   mode: 'type',
-  typePlaceholder: 'Intervall tippen …',
+  typePlaceholder: 'Intervall tippen, z. B. gr. 3 oder große Terz',
   items: [
     { id: 'l01', front: 'Alle meine Entchen (aufwärts)', back: 'große Sekunde', accept: ['gr. Sekunde', 'grosse Sekunde'] },
     { id: 'l02', front: 'When the Saints Go Marching In (aufwärts)', back: 'große Terz', accept: ['gr. Terz', 'grosse Terz'] },

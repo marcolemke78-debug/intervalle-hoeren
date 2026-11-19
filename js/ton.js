@@ -90,6 +90,31 @@ const Ton = {
 };
 
 /**
+ * Kurzformen von Intervallen beim Tippen erlauben (Trainer und Lückentexte):
+ * "gr. 3", "gr3", "große 3", "kl. Terz", "r. 5", "rein 4", "gr. Sext", "8" → voller Name.
+ * Hängt sich in Exercises._norm ein, das Trainer und Lückentext beide benutzen.
+ */
+Exercises.intervalShort = function (t) {
+  const m = t.match(/^(kleine|kleiner|klein|kl|k|große|großer|groß|grosse|grosser|gross|gr|g|reine|reiner|rein|r)?\.?\s*(\d|sekunde|sek|terz|quarte|quart|qua|quinte|quint|qui|sexte|sext|sex|septime|sept|sep|oktave|okt|okt)\.?$/);
+  if (!m) return t;
+  const names = { 2: 'sekunde', 3: 'terz', 4: 'quarte', 5: 'quinte', 6: 'sexte', 7: 'septime', 8: 'oktave' };
+  let n = m[2];
+  if (/^\d$/.test(n)) {
+    if (!names[n]) return t;
+    n = names[n];
+  } else {
+    n = { sek: 'sekunde', quart: 'quarte', qua: 'quarte', quint: 'quinte', qui: 'quinte', sext: 'sexte', sex: 'sexte', sept: 'septime', sep: 'septime', okt: 'oktave' }[n] || n;
+  }
+  const p = m[1] || '';
+  const pre = /^k/.test(p) ? 'kleine ' : /^g/.test(p) ? 'große ' : ''  // "reine Quinte" = "Quinte": Quarte, Quinte, Oktave gibt es hier nur rein;
+  return pre + n;
+};
+(function () {
+  const baseNorm = Exercises._norm;
+  Exercises._norm = function (s) { return Exercises.intervalShort(baseNorm(s)); };
+})();
+
+/**
  * Hörübung. Felder:
  *   set        – Liste der Halbtonzahlen, die vorkommen können, z. B. [2, 4, 7, 12]
  *   names      – 'grob' (Sekunde, Terz …) oder 'fein' (kleine Terz, große Terz …)
