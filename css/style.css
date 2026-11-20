@@ -1026,3 +1026,9 @@ summary { display: flex; align-items: center; }
 .ear-result button { margin-top: 0.5rem; }
 .ear-options { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.5rem; }
 .phase ol { padding-left: 1.6rem; }
+
+/* ---------------- Vorspielen ---------------- */
+.vs-title { font-size: 1.1rem; margin: 1.25rem 0 0.5rem; }
+.vs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0.5rem; }
+.vs-grid .mc-option { text-align: center; min-height: 44px; }
+.vs-grid .mc-option.vs-sel { background: var(--accent); color: #fff; border-color: var(--accent); }

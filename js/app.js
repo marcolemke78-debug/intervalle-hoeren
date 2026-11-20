@@ -10,6 +10,8 @@ function navigate(route) {
     Renderer.renderLesson(route);
   } else if (route === 'mixed') {
     Renderer.renderMixed();
+  } else if (route === 'vorspielen') {
+    Vorspielen.render(document.getElementById('lesson-container'));
   } else if (route === 'trainer') {
     Trainer.render(document.getElementById('lesson-container'));
   } else {

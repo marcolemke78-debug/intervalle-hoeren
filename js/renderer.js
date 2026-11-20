@@ -259,7 +259,7 @@ const Renderer = {
     const nav = document.getElementById('nav');
     nav.innerHTML = '';
     const top = this.el('ul', 'nav-top');
-    [['start', 'Start'], ['trainer', CARDS.title], ['mixed', 'Gemischt üben']].forEach(([r, label]) => {
+    [['start', 'Start'], ['trainer', CARDS.title], ['mixed', 'Gemischt üben'], ['vorspielen', 'Vorspielen']].forEach(([r, label]) => {
       const li = this.el('li', this.current === r ? 'active' : '', label);
       li.dataset.route = r;
       top.appendChild(li);
